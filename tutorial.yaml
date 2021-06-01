@@ -1,0 +1,56 @@
+# comment
+
+microservice:  # list of objects
+  # simple key:value pairs
+  - app: user-authentication # string without or with quotes  # list
+    port: 9000 # integer
+    version: 1.0.0 # decimals
+    deployed: on # yes, on, off all are boolean values
+
+  - app: shopping-cart
+    versions:
+      - 1.9 # primitive items
+      - 2.0
+      - 3.0
+    port: [ "9002", 9001, 3000 ] # primitive items as list - can be a mix of strings, int etc
+
+multilineString: | # multiline string
+  this is a multi line string
+  this is the next line
+  next line
+
+singlelineString: > # string tpo be on one line ... written as multiline for readability
+  this is a single line string,
+  this should be all on one line.
+  Some more stuff
+
+command:
+  - sh
+  - -c
+  - | # multi line string
+    #! /usr/bin/env bash -e
+    http () {
+      local path="${1}"
+      set -- -XGET -s --fail
+      # some more stuff here
+      curl -k "$@" "http://localhost:5601${path}"
+    }
+    http "/app/kabana"
+
+command:
+  - /bin/sh
+  - -ec
+  - >- # accessing environmental variables using $variable_name
+    mysql -h 127.0.0.1 -u root -p$MYSQL_ROOT_PASSWORD -e  'SELECT 1'
+
+-------------------------------------------------------------------------------------------------------
+# 1. key-value pairs
+# 2. comments
+# 3. objects
+# 4. lists
+# 5. boolean
+# 6. multiline strings
+# 7. single line strings
+# 8. env variables
+# 9. place holders
+# 10. multiple yaml documents

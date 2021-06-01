@@ -1,0 +1,22 @@
+# kubernetes pod
+
+apiVersion: v1   # key-value pair
+kind: Pod  # key-value pair
+metadata:  # object
+  name: nginx
+  labels: # object
+    app: nginx
+spec: # object
+  containers: # list of objects
+    - name: mginx
+      image: nginx
+      ports: # list
+        - containerPort: 3000
+      volumeMounts: # list of objects
+        - mountPath: /usr/nginx/html
+          name: nginx-volume
+
+    - name: sidecar-container
+      image: curlimages/curl
+      command: ["/bin/sh"]
+      args: ["-c", "echo hello from sidecar container; sleep 300"]

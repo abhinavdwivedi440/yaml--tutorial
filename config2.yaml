@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config-file
+data:
+  mosquitto.conf: |
+    log_dest stdout
+    log-type all
+    log_timestamp true
+    listener 9001
+
+--- # multiple yaml documents
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mosquitto-config-file
+data:
+  mosquitto.conf: |
+    log_dest stdout
+    log-type all
+    log_timestamp true
+    listener 9001
+
+
+# this can be very handy in kubernetes
+#  specially where you have multiple components
+#  for one service and you want to
+#  group them in a single yaml file
